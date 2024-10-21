@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Pirâmide 3D</title>
+  <link href="styl.css" rel="stylesheet" type="text/css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="./vanilla-tilt.js"></script>
+
+</head>
+
+<body>
+
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #333;
+    }
+
+    .scene {
+      perspective: 1000px;
+      transform: scale(0.4);
+    }
+
+    .piramide,
+    .piramide2 {
+      width: 10cm;
+      height: 10cm;
+      position: relative;
+      transform-style: preserve-3d;
+      transform: rotateX(-30deg) rotateY(45deg);
+      /* animation: girar 15s infinite linear; */
+      transition: 1s;
+      cursor: pointer;
+    }
+
+    @keyframes girar {
+      0% {
+        transform: rotateX(-30deg) rotateY(0deg) translateY(1cm);
+      }
+
+      50% {
+        transform: rotateX(-30deg) rotateY(180deg) translateY(-3cm);
+      }
+
+      100% {
+        transform: rotateX(-30deg) rotateY(360deg) translateY(1cm);
+      }
+    }
+
+    .piramide2 {
+      transform: translate3d(59px, 111px, -320px) rotateX(38deg) rotateY(181deg) rotateZ(0deg) !important;
+    }
+
+    .piramide1 {
+      transform-style: preserve-3d;
+      width: 10cm;
+      height: 10cm;
+      transform: translate3d(-31px, 2cm, 123px);
+    }
+
+    .topo {
+      transform-style: preserve-3d;
+      width: 4cm;
+      height: 4cm;
+      transform: translate3d(99px, -293px, 49px);
+      transition: 1s;
+    }
+
+    .lados {
+      position: absolute;
+      width: 10cm;
+      height: 20cm;
+      filter: drop-shadow(2px 4px 6px black);
+      transition: 1s;
+    }
+
+    .topos {
+      position: absolute;
+      width: 4cm;
+      height: 8cm;
+      filter: drop-shadow(7px 11px 12px gold);
+    }
+
+    .ladoTopo1 {
+      transform: rotateX(19.3deg) translateZ(-47.6px) translateY(133.5px) translateX(27px);
+    }
+
+    .ladoTopo2 {
+      transform: rotateY(120deg) rotateX(19.5deg) translateZ(37.3px) translateY(159.7px) translateX(51px);
+    }
+
+    .ladoTopo3 {
+      transform: rotateY(240deg) rotateX(19.3deg) translateZ(14.15px) translateY(157.3px) translateX(-39px);
+    }
+
+    .lado1 {
+      transform: rotateX(35.3deg) translateZ(-79.6px) translateY(111.5px);
+    }
+
+    .lados img {
+      height: 50%;
+    }
+
+    .topos img {
+      height: 35%;
+    }
+
+    .lado2 {
+      transform: rotateY(90deg) rotateX(35.3deg) translateZ(81.3px) translateY(223.7px) translateX(185px);
+    }
+
+    .lado3 {
+      transform: rotateY(270deg) rotateX(35.3deg) translateZ(75.15px) translateY(216.3px) translateX(-194px);
+    }
+
+    .lado4 {
+      transform: rotateX(90deg) translateZ(-3.67cm);
+    }
+
+    .lado5 {
+      transform: rotateX(-34deg) translateZ(-231.6px) translateY(322.5px);
+    }
+
+    .centro {
+      transform: translate3d(25px, 208px, -124px) rotateY(0deg);
+      text-align: center;
+      /* animation: girarOlho 4s infinite linear; */
+    }
+
+    .centro img {
+      height: 30%;
+    }
+
+    .eixo {
+      width: 10cm;
+      height: 20cm;
+      width: 10cm;
+      height: 9.3cm;
+      transform: translate3d(25px, 524px, -119px);
+      transform-style: preserve-3d;
+    }
+
+    @keyframes girarOlho {
+      0% {
+        transform: translate3d(25px, 238px, -124px) rotateY(0deg);
+      }
+
+      50% {
+        transform: translate3d(25px, 238px, -124px) rotateY(-180deg);
+      }
+
+      100% {
+        transform: translate3d(25px, 238px, -124px) rotateY(-360deg);
+      }
+    }
+
+    .asa {
+      width: 10cm;
+      height: 0;
+      position: relative;
+      transform-style: preserve-3d;
+      transform: rotateX(-30deg) rotateY(45deg);
+      animation: 5s infinite linear;
+    }
+
+    .asas {
+      position: absolute;
+      width: 20cm;
+      height: 10cm;
+      filter: drop-shadow(2px 4px 6px);
+      display: flex;
+    }
+
+    .asas img {
+      width: 10cm;
+    }
+
+    .asa1 {
+      transform: translate3d(-10px, 200px, -100px) rotateY(45deg);
+      justify-content: flex-start;
+      animation: baterFogo 0.5s infinite linear;
+    }
+
+    .asa2 {
+      transform: translate3d(-280px, 200px, -100px) rotateY(-45deg);
+      justify-content: flex-end;
+      animation: baterAgua 0.5s infinite linear;
+
+    }
+
+    @keyframes baterFogo {
+      0% {
+        transform: translate3d(-280px, 200px, -100px) rotateY(-45deg);
+      }
+
+      50% {
+        transform: translate3d(-280px, 200px, -100px) rotateY(45deg);
+      }
+
+      100% {
+        transform: translate3d(-280px, 200px, -100px) rotateY(-45deg);
+
+      }
+    }
+
+    @keyframes baterAgua {
+      0% {
+        transform: translate3d(-10px, 200px, -100px) rotateY(45deg);
+      }
+
+      50% {
+        transform: translate3d(-10px, 200px, -100px) rotateY(-45deg);
+      }
+
+      100% {
+        transform: translate3d(-10px, 200px, -100px) rotateY(45deg);
+
+      }
+    }
+
+    .base {
+      transform-style: preserve-3d;
+      /* animation: girarOposto 15s infinite linear; */
+    }
+
+    .bases {
+      position: absolute;
+    }
+
+    .bases img {
+      width: 435px;
+    }
+
+    .base1 {
+      transform: rotateX(90deg) translate3d(-34.67px, -59px, 85px);
+      animation: piscar 3s infinite linear;
+    }
+
+    .base2 {
+      transform: rotateX(90deg) translate3d(-34.67px, -59px, 81px);
+    }
+
+    .base3 {
+      transform: translate3d(-105px, -42px, 149px) rotateX(20deg);
+    }
+
+    .base4 {
+      transform: translate3d(-325px, -39px, -50px) rotateX(0deg) rotateY(-90deg);
+    }
+
+    .base5 {
+      transform: translate3d(-106px, -41px, -273px) rotateX(-25deg) rotateY(0deg);
+    }
+
+    .base6 {
+      transform: translate3d(105px, -36px, -61px) rotateX(0deg) rotateY(90deg);
+    }
+
+    .base3 img,
+    .base4 img,
+    .base5 img,
+    .base6 img {
+      width: 578px !important;
+    }
+
+    @keyframes piscar {
+      0% {
+        filter: drop-shadow(0px 0px 0px white);
+      }
+
+      50% {
+        filter: drop-shadow(0px 0px 20px white);
+      }
+
+      100% {
+        filter: drop-shadow(0px 0px 0px white);
+      }
+    }
+
+    @keyframes girarOposto {
+      0% {
+        transform: rotateX(0deg) rotateY(0deg) translateY(-1cm);
+      }
+
+      50% {
+        transform: rotateX(0deg) rotateY(-180deg) translateY(3cm);
+      }
+
+      100% {
+        transform: rotateX(0deg) rotateY(-360deg) translateY(-1cm);
+      }
+    }
+
+
+
+    button {
+      padding: 3%;
+      border: none;
+      background: gray;
+      border-radius: 20px;
+      font-size: larger;
+      cursor: pointer;
+    }
+  </style>
+  <section style="
+  display: flex;
+  flex-direction: column;
+  height: 90%;">
+
+    <div style="
+    text-align: center;
+    margin: 0% 1% 50% 1%;
+    position: relative;">
+      <!-- <button id="mover">
+        mover
+      </button>
+      <button id="girar" style="display: none;">
+        girar
+      </button>
+      <button id="abrir">
+        Abrir piramide
+      </button> -->
+      <button id="fechar" style="display: none;">
+        Fechar piramide
+      </button>
+      <button class="up">
+        +
+      </button>
+      <button class="down">
+        -
+      </button>
+      <button class="previus">
+        ◄◄
+      </button>
+      <button class="play">
+        ►
+      </button>
+      <button class="pause">
+        ||
+      </button>
+      <button class="stop">
+        ■
+      </button>
+      <button class="next">
+        ►►
+      </button>
+    </div>
+
+    <div class="musicas">
+      <audio id="msc1" src="./musicas/C418 - Aria Math (Minecraft Volume Beta) [ ezmp3.cc ].mp3"></audio>
+      <audio id="msc2" src="./musicas/C418 - Haggstrom - Minecraft Volume Alpha.mp3"></audio>
+      <audio id="msc3" src="./musicas/C418 - Living Mice - Minecraft Volume Alpha.mp3"></audio>
+      <audio id="msc4" src="./musicas/C418 - Mice on Venus - Minecraft Volume Alpha [ ezmp3.cc ].mp3"></audio>
+      <audio id="msc5" src="./musicas/C418 - Moog City - Minecraft Volume Alpha [ ezmp3.cc ].mp3"></audio>
+      <audio id="msc6" src="./musicas/C418 - Moog City 2 (Minecraft Volume Beta) [ ezmp3.cc ].mp3"></audio>
+      <audio id="msc7" src="./musicas/C418 - Subwoofer Lullaby - Minecraft Volume Alpha [ ezmp3.cc ].mp3"></audio>
+      <audio id="msc8" src="./musicas/C418 - Wet Hands - Minecraft Volume Alpha [ ezmp3.cc ].mp3"></audio>
+    </div>
+
+    <div class="scene">
+      <div class="piramide" data-tilt>
+        <div class="piramide1">
+          <div class="lados lado1">
+            <img src="./piramideCentro.png" style="position: absolute;" alt="">
+          </div>
+          <div class="lados lado2">
+            <img src="./lado2.png" alt="">
+          </div>
+          <div class="lados lado3">
+            <img src="./lado3.png" alt="">
+          </div>
+          <div class="lados lado4">
+            <img src="./baseIma.png" alt="">
+          </div>
+          <div class="lados lado5">
+            <img src="./lado5.png" alt="">
+          </div>
+          <div class="asas asa1">
+            <img src="./asaFogo.png" alt="">
+          </div>
+          <div class="asas asa2">
+            <img src="./asaAgua.png" alt="">
+          </div>
+        </div>
+
+        <div class="topo">
+          <!-- <div class="topos ladoTopo1">
+            <img src="./topoOuro.png">
+          </div>
+          <div class="topos ladoTopo2">
+            <img src="./topoOuro.png" alt="">
+          </div>
+          <div class="topos ladoTopo3">
+            <img src="./topoOuro.png" alt="">
+          </div> -->
+        </div>
+
+        <!-- <div class="base">
+          <div class="bases base2">
+            <img src="./baseIma.png">
+          </div>
+          <div class="bases base3">
+            <img src="./basebase.png">
+          </div>
+          <div class="bases base4">
+            <img src="./basebase.png">
+          </div>
+          <div class="bases base5">
+            <img src="./basebase.png">
+          </div>
+          <div class="bases base6">
+            <img src="./basebase.png">
+          </div>
+        </div> -->
+
+      </div>
+
+
+    </div>
+  </section>
+
+  <script>
+    $(document).ready(function () {
+
+      $(".pause, .stop").hide();
+
+      const audios = $('audio');
+      let currentTrack = 0;
+
+      function playTrack(index) {
+        audios.each(function (i) {
+          if (i === index) {
+            this.play();
+          } else {
+            this.pause();
+            this.currentTime = 0; // Reinicia a música que não está tocando
+          }
+        });
+      }
+
+      $(".play").click(function () {
+        $(".pause, .stop").show();
+        $(this).hide(); // Esconde o botão de play
+        playTrack(currentTrack);
+      });
+
+      $(".pause").click(function () {
+        audios.each(function () {
+          this.pause();
+        });
+        $(".play").show();
+        $(this).hide(); // Esconde o botão de pause
+      });
+
+      $(".stop").click(function () {
+        audios.each(function () {
+          this.pause();
+          this.currentTime = 0; // Reinicia todas as músicas
+        });
+        $(".play").show();
+        $(this).hide(); // Esconde o botão de stop
+      });
+
+      $(".next").click(function () {
+        currentTrack = (currentTrack + 1) % audios.length; // Avança para a próxima música
+        playTrack(currentTrack);
+      });
+
+      $(".previus").click(function () {
+        currentTrack = (currentTrack - 1) % audios.length; // Volta uma música
+        playTrack(currentTrack);
+      });
+
+      $(".play:first").show(); // Mostra apenas o primeiro botão de play inicialmente
+
+
+      let isDragging = false;
+      let previousX, previousY;
+      let rotationX = -30;
+      let rotationY = 45;
+
+      // Função para capturar as coordenadas do mouse ou do toque
+      function getEventCoordinates(e) {
+        if (e.type.startsWith('touch')) {
+          return {
+            x: e.touches[0].clientX,
+            y: e.touches[0].clientY
+          };
+        } else {
+          return {
+            x: e.clientX,
+            y: e.clientY
+          };
+        }
+      }
+
+      $('#mover').click(function () {
+        $('.piramide, .piramide2').css('animation', 'none');
+        $('.base').css('animation', 'none');
+        $('#mover').hide();
+        $('#girar').show();
+      });
+
+      $('#girar').click(function () {
+        $('.piramide, .piramide2').css('animation', 'girar 15s infinite linear');
+        $('.base').css('animation', 'girarOposto 15s infinite linear');
+        $('#mover').show();
+        $('#girar').hide();
+      });
+
+      $('#abrir').click(function () {
+        $('.lado1').css('transform', 'rotateX(-90deg) translateZ(135.6px) translateY(-5.5px)');
+        $('.lado2').css('transform', 'rotateY(120deg) rotateX(-90deg) translateZ(138.3px) translateY(-215.7px) translateX(65px)');
+        $('.lado3').css('transform', 'rotateY(240deg) rotateX(-90deg) translateZ(138.15px) translateY(-165.3px) translateX(-153px)');
+        $('.topo').css('transform', 'translate3d(99px, -411px, 50px)');
+
+        $(this).hide();
+        $('#fechar').show();
+      });
+
+      $('#fechar').click(function () {
+        $('.lado1').css('transform', 'rotateX(19.3deg) translateZ(-46.6px) translateY(133.5px)');
+        $('.lado2').css('transform', 'rotateY(120deg) rotateX(19.5deg) translateZ(157.3px) translateY(203.7px) translateX(65px)');
+        $('.lado3').css('transform', 'rotateY(240deg) rotateX(19.3deg) translateZ(104.15px) translateY(186.3px) translateX(-154px)');
+        $('.topo').css('transform', 'translate3d(99px, -293px, 49px)');
+        $(this).hide();
+        $('#abrir').show();
+      });
+
+      var tamanho = 1; // Valor inicial da escala
+
+      $('.up').click(function () {
+        tamanho += 0.1; // Incrementa a escala
+        $('.scene').css('transform', 'scale(' + tamanho + ')');
+      });
+
+      $('.down').click(function () {
+        tamanho -= 0.1; // Decrementa a escala
+        if (tamanho < 0.1) tamanho = 0.1; // Evita que o tamanho fique muito pequeno ou negativo
+        $('.scene').css('transform', 'scale(' + tamanho + ')');
+      });
+
+      $('body').on('mousedown touchstart', function (e) {
+        isDragging = true;
+        let coords = getEventCoordinates(e);
+        previousX = coords.x;
+        previousY = coords.y;
+      });
+
+      $(document).on('mousemove touchmove', function (e) {
+        if (isDragging) {
+          let coords = getEventCoordinates(e);
+          let deltaX = coords.x - previousX;
+          let deltaY = coords.y - previousY;
+
+          rotationX -= deltaY * 0.3; // Ajusta a sensibilidade do eixo X
+          rotationY += deltaX * 0.3; // Ajusta a sensibilidade do eixo Y
+
+          $('.piramide, .asa').css('transform', `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`);
+
+          previousX = coords.x;
+          previousY = coords.y;
+        }
+      });
+
+      $(document).on('mouseup touchend', function () {
+        isDragging = false;
+      });
+    });
+
+  </script>
+
+</body>
+
+</html>
