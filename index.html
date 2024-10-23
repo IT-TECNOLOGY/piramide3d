@@ -84,8 +84,8 @@
 
     .topos {
       position: absolute;
-      width: 4cm;
-      height: 8cm;
+      width: 10cm;
+      height: 20cm;
       filter: drop-shadow(7px 11px 12px gold);
     }
 
@@ -98,6 +98,10 @@
     }
 
     .ladoTopo3 {
+      transform: rotateY(240deg) rotateX(19.3deg) translateZ(14.15px) translateY(157.3px) translateX(-39px);
+    }
+
+    .ladoTopo4 {
       transform: rotateY(240deg) rotateX(19.3deg) translateZ(14.15px) translateY(157.3px) translateX(-39px);
     }
 
@@ -114,19 +118,19 @@
     }
 
     .lado2 {
-      transform: rotateY(90deg) rotateX(35.3deg) translateZ(81.3px) translateY(223.7px) translateX(185px);
+      transform: rotateY(90deg) rotateX(35.3deg) translateZ(76.3px) translateY(221.7px) translateX(193px);
     }
 
     .lado3 {
-      transform: rotateY(270deg) rotateX(35.3deg) translateZ(75.15px) translateY(216.3px) translateX(-194px);
+      transform: rotateY(270deg) rotateX(35.3deg) translateZ(75.15px) translateY(219.3px) translateX(-190px);
     }
 
     .lado4 {
-      transform: rotateX(90deg) translateZ(-3.67cm);
+      transform: rotateX(90deg) translateZ(-3.61cm);
     }
 
     .lado5 {
-      transform: rotateX(-34deg) translateZ(-231.6px) translateY(322.5px);
+      transform: rotateX(-34deg) translateZ(-238.6px) translateY(326.5px);
     }
 
     .centro {
@@ -184,7 +188,7 @@
     }
 
     .asa1 {
-      transform: translate3d(-10px, 200px, -100px) rotateY(45deg);
+      transform: translate3d(-65px, 200px, -100px) rotateY(45deg);
       justify-content: flex-start;
       animation: baterFogo 0.5s infinite linear;
     }
@@ -309,6 +313,53 @@
       font-size: larger;
       cursor: pointer;
     }
+
+    .neons {
+      transform: translateY(-387px);
+      display: none;
+    }
+
+    .lado12,
+    .lado22,
+    .lado32,
+    .lado52 {
+      /* animation: piscar1 2s infinite linear; */
+    }
+
+    @keyframes piscar1 {
+      0% {
+        filter: drop-shadow(0px 0px 0px red);
+      }
+
+      50% {
+        filter: drop-shadow(10px 4px 4px red);
+      }
+
+      100% {
+        filter: drop-shadow(0px 0px 0px red);
+      }
+    }
+
+    .lado13,
+    .lado23,
+    .lado33,
+    .lado53 {
+      /* animation: piscar2 2s infinite linear; */
+    }
+
+    @keyframes piscar2 {
+      0% {
+        filter: drop-shadow(0px 0px 0px red);
+      }
+
+      50% {
+        filter: drop-shadow(10px 4px 4px red);
+      }
+
+      100% {
+        filter: drop-shadow(0px 0px 0px red);
+      }
+    }
   </style>
   <section style="
   display: flex;
@@ -355,29 +406,70 @@
     </div>
 
     <div class="musicas">
-      <audio id="msc3" src="./musicas/C418 - Living Mice - Minecraft Volume Alpha.mp3"></audio>
-      <audio id="msc4" src="./musicas/C418 - Mice on Venus - Minecraft Volume Alpha [ ezmp3.cc ].mp3"></audio>
-      <audio id="msc5" src="./musicas/C418 - Moog City - Minecraft Volume Alpha [ ezmp3.cc ].mp3"></audio>
-      <audio id="msc8" src="./musicas/C418 - Wet Hands - Minecraft Volume Alpha [ ezmp3.cc ].mp3"></audio>
+      <audio id="msc1" src="./musicas/sandopolis1.mp3"></audio>
     </div>
 
     <div class="scene">
       <div class="piramide" data-tilt>
         <div class="piramide1">
           <div class="lados lado1">
-            <img src="./piramideCentro.png" style="position: absolute;" alt="">
+            <img src="./ladoOlho.png" style="position: absolute;" alt="">
+            <div class="neons">
+              <div class="lados lado12">
+                <img src="./ladoV1.png" style="position: absolute;" alt="">
+              </div>
+              <div class="lados lado13">
+                <img src="./ladoAzul.png" style="position: absolute;" alt="">
+              </div>
+              <div class="lados lado14">
+                <img src="./ladoV2.png" style="position: absolute;" alt="">
+              </div>
+            </div>
           </div>
           <div class="lados lado2">
-            <img src="./lado2.png" alt="">
+            <img src="./ladoDeuses.png" alt="">
+            <div class="neons">
+              <div class="lados lado22">
+                <img src="./ladoV1.png" style="position: absolute;" alt="">
+              </div>
+              <div class="lados lado23">
+                <img src="./ladoAzul.png" style="position: absolute;" alt="">
+              </div>
+              <div class="lados lado24">
+                <img src="./ladoV2.png" style="position: absolute;" alt="">
+              </div>
+            </div>
           </div>
           <div class="lados lado3">
-            <img src="./lado3.png" alt="">
+            <img src="./ladoDeuses.png" alt="">
+            <div class="neons">
+              <div class="lados lado32">
+                <img src="./ladoV1.png" style="position: absolute;" alt="">
+              </div>
+              <div class="lados lado33">
+                <img src="./ladoAzul.png" style="position: absolute;" alt="">
+              </div>
+              <div class="lados lado34">
+                <img src="./ladoV2.png" style="position: absolute;" alt="">
+              </div>
+            </div>
           </div>
           <div class="lados lado4">
             <img src="./baseIma.png" alt="">
           </div>
           <div class="lados lado5">
-            <img src="./lado5.png" alt="">
+            <img src="./ladoDeuses.png" alt="">
+            <div class="neons">
+              <div class="lados lado52">
+                <img src="./ladoV1.png" style="position: absolute;" alt="">
+              </div>
+              <div class="lados lado53">
+                <img src="./ladoAzul.png" style="position: absolute;" alt="">
+              </div>
+              <div class="lados lado54">
+                <img src="./ladoV2.png" style="position: absolute;" alt="">
+              </div>
+            </div>
           </div>
           <div class="asas asa1">
             <img src="./asaFogo.png" alt="">
@@ -389,14 +481,15 @@
 
         <div class="topo">
           <!-- <div class="topos ladoTopo1">
-            <img src="./topoOuro.png">
+            <img src="./ladoV1.png">
           </div>
-          <div class="topos ladoTopo2">
-            <img src="./topoOuro.png" alt="">
+          <div class="topos ladoTopo12">
+            <img src="./ladoAzul.png">
           </div>
-          <div class="topos ladoTopo3">
-            <img src="./topoOuro.png" alt="">
+          <div class="topos ladoTopo13">
+            <img src="./ladoV2.png">
           </div> -->
+
         </div>
 
         <!-- <div class="base">
